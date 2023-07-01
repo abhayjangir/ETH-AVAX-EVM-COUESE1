@@ -1,0 +1,22 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.17;
+
+contract Statement {
+    uint b=20;
+    // assert function
+    function testAssert(uint num) public pure{
+        assert(num!=0);
+    }
+    // revert function
+    function split (uint _numerator, uint _denomenator) public pure returns (uint){
+        if(_numerator<_denomenator){  
+            revert("numerator should be greater than denomenator");        
+        }
+        return _numerator/_denomenator;
+    }
+    // require function 
+    function multiply (uint a) public view returns (uint){
+        require(a>0,"Value of a is zero , result should not be zero");
+        return a*b;
+    }
+}
