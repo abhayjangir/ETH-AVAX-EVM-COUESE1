@@ -1,22 +1,26 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.17;
+pragma solidity ^0.8.0;
 
-contract Statement {
-    uint b=20;
+contract SmartContract {
+    uint public value;
+    // require function
+    function setValue(uint _value) public {
+        require(_value > 0, "Value must be greater than zero");
+        value = _value;
+    }
     // assert function
-    function testAssert(uint num) public pure{
-        assert(num!=0);
+    function addValue(uint _value) public {
+        uint newValue = value + _value;
+        assert(newValue > value);
+        value = newValue;
     }
     // revert function
-    function split (uint _numerator, uint _denomenator) public pure returns (uint){
-        if(_numerator<_denomenator){  
-            revert("numerator should be greater than denomenator");        
+    function subtractValue(uint _value) public {
+        uint newValue = value - _value;
+        if (newValue < value) {
+            value = newValue;
+        } else {
+            revert("Value must remain positive");
         }
-        return _numerator/_denomenator;
-    }
-    // require function 
-    function multiply (uint a) public view returns (uint){
-        require(a>0,"Value of a is zero , result should not be zero");
-        return a*b;
     }
 }
